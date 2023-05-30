@@ -1,13 +1,14 @@
 import { createMachine } from "xstate"
+import { GameChoice, ResultGame } from "./types"
 
 type GameContext = {
-  playerChoice: "rock" | "paper" | "scissors" | null
-  computerChoice: "rock" | "paper" | "scissors" | null
-  result: "win" | "lose" | "draw" | null
+  playerChoice: GameChoice
+  computerChoice: GameChoice
+  result: ResultGame
+  score: number
 }
 
 type GameEvent = { type: "PLAY"; playerChoice: "rock" | "paper" | "scissors" }
-
 const gameMachine = createMachine(
   {
     id: "game",
@@ -16,6 +17,7 @@ const gameMachine = createMachine(
       playerChoice: null,
       computerChoice: null,
       result: null,
+      score: 0,
     },
     states: {
       idle: {
@@ -38,26 +40,17 @@ const gameMachine = createMachine(
       },
       win: {
         on: {
-          PLAY: {
-            target: "playing",
-            actions: ["setPlayerChoice"],
-          },
+          RESTART: "idle",
         },
       },
       lose: {
         on: {
-          PLAY: {
-            target: "playing",
-            actions: ["setPlayerChoice"],
-          },
+          RESTART: "idle",
         },
       },
       draw: {
         on: {
-          PLAY: {
-            target: "playing",
-            actions: ["setPlayerChoice"],
-          },
+          RESTART: "idle",
         },
       },
     },
@@ -70,10 +63,7 @@ const gameMachine = createMachine(
       setComputerChoice: (context: GameContext) => {
         const choices = ["rock", "paper", "scissors"]
         const randomIndex = Math.floor(Math.random() * choices.length)
-        context.computerChoice = choices[randomIndex] as
-          | "rock"
-          | "paper"
-          | "scissors"
+        context.computerChoice = choices[randomIndex] as GameChoice
       },
       calculateResult: (context: GameContext) => {
         const { playerChoice, computerChoice } = context
@@ -85,8 +75,10 @@ const gameMachine = createMachine(
           (playerChoice === "scissors" && computerChoice === "paper")
         ) {
           context.result = "win"
+          context.score += 1
         } else {
           context.result = "lose"
+          context.score -= 1
         }
       },
     },
