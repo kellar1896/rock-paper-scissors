@@ -1,10 +1,10 @@
-import { Counter } from "./features/counter/Counter"
 import "./App.css"
+import GameCounter from "./features/gameCounter/GameCounter"
 
 function App() {
   return (
     <div className="h-screen w-screen overflow-scroll">
-      <Counter />
+      <GameCounter />
     </div>
   )
 }
