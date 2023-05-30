@@ -27,6 +27,7 @@ const gameMachine = createMachine(
         },
       },
       playing: {
+        entry: ["setComputerChoice", "calculateResult"],
         on: {
           "": [
             { target: "win", cond: "playerWins" },
@@ -76,7 +77,6 @@ const gameMachine = createMachine(
       },
       calculateResult: (context: GameContext) => {
         const { playerChoice, computerChoice } = context
-
         if (playerChoice === computerChoice) {
           context.result = "draw"
         } else if (
