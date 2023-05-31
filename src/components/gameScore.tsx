@@ -1,6 +1,6 @@
-import { useApp, useTick } from "@pixi/react"
+import { useApp } from "@pixi/react"
 import * as PIXI from "pixi.js"
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { memo, useEffect, useMemo, useRef } from "react"
 
 type GameScoreProps = {
   x: number
