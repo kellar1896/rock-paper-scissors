@@ -1,4 +1,4 @@
-import { Stage, Sprite, Container, Text, useTick } from "@pixi/react"
+import { Stage, Sprite, Container, Text } from "@pixi/react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import rock from "../../assets/rock.png"
 import paper from "../../assets/paper.png"
