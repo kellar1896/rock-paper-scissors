@@ -98,13 +98,4 @@ const GameCounter = () => {
   )
 }
 
-// const boardResult = (value: any, playerChoice: ) => {
-//   console.log(current)
-//   return (
-//     <div>
-//       <p>asdf</p>
-//     </div>
-//   )
-// }
-
 export default GameCounter
