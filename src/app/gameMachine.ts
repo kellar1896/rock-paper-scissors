@@ -13,6 +13,7 @@ const gameMachine = createMachine(
   {
     id: "game",
     initial: "idle",
+    predictableActionArguments: true,
     context: {
       playerChoice: null,
       computerChoice: null,
