@@ -38,6 +38,8 @@ const GameCanvas = () => {
   const spriteSize = isMobile ? 50 : 200
   const [current, send] = useMachine(gameMachine)
   const [playerChoice, setPlayerChoice] = useState("")
+  const playerSpriteRef = useRef<CustomSprite>(null)
+  const computerSpriteRef = useRef<CustomSprite>(null)
 
   const handlePlay = useCallback((choice: string) => {
     setPlayerChoice(choice)
@@ -52,9 +54,6 @@ const GameCanvas = () => {
   const getSelectionImage = useCallback((choice: string | null) => {
     if (choice !== null) return choices.find((e) => e.value === choice)?.image
   }, [])
-
-  const playerSpriteRef = useRef<CustomSprite>(null)
-  const computerSpriteRef = useRef<CustomSprite>(null)
 
   const animateBounce = useCallback((lastTime: number) => {
     const playerSprite = playerSpriteRef.current
